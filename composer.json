@@ -1,0 +1,35 @@
+{
+    "name": "swdevelopment/craft-stripe",
+    "description": "This is a simple plugin that allows Invoicing and Payments",
+    "type": "craft-plugin",
+    "require": {
+        "php": ">=8.0.2",
+        "craftcms/cms": "^4.5.0"
+    },
+    "require-dev": {
+        "craftcms/phpstan": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "swdevelopment\\craftstripe\\": "src/"
+        }
+    },
+    "extra": {
+        "handle": "_craft-stripe",
+        "name": "craft-stripe",
+        "developer": "Tim Strawbridge",
+        "documentationUrl": "",
+        "class": "swdevelopment\\craftstripe\\CraftStripe"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
+}
+
