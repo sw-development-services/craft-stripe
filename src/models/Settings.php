@@ -10,8 +10,8 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
-    public string $name;
-    public string $key;
+    // public string $name;
+    public ?string $secretKey;
 
-
+    
 }

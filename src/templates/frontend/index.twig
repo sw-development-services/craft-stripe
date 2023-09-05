@@ -1,0 +1,34 @@
+{% extends "_layouts/cp.twig" %}
+
+{% import '_includes/forms.twig' as forms %}
+    
+    {% set customers = customers %}
+
+    {% set title = "Craft-Stripe"|t('craft-stripe') %}
+    
+        
+    
+        {% block content %}
+            <h2>Craft Stripe</h2>
+    
+        {% endblock %}
+
+        {% block toolbar %}
+            <h2>Toolbar</h2>
+        {% endblock %}
+
+
+        {% block sidebar %}
+            {% include "craft-stripe/_layout/_sidebar" %}
+        {% endblock %}
+        
+
+
+
+        {% block footer %}
+            This is the footer
+        {% endblock %}
+    
+    
+    
+    

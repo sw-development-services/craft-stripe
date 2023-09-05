@@ -1,10 +1,11 @@
 {
     "name": "swdevelopment/craft-stripe",
-    "description": "This is a simple plugin that allows Invoicing and Payments",
+    "description": "This is a simple plugin that allows Invoicing and Payments using Stripe",
     "type": "craft-plugin",
     "require": {
         "php": ">=8.0.2",
-        "craftcms/cms": "^4.5.0"
+        "craftcms/cms": "^4.5.0",
+        "stripe/stripe-php": "^12.0"
     },
     "require-dev": {
         "craftcms/phpstan": "dev-main"
@@ -15,7 +16,7 @@
         }
     },
     "extra": {
-        "handle": "_craft-stripe",
+        "handle": "craft-stripe",
         "name": "craft-stripe",
         "developer": "Tim Strawbridge",
         "documentationUrl": "",
@@ -32,4 +33,3 @@
         }
     }
 }
-

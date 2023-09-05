@@ -1,0 +1,16 @@
+{# @var plugin \swdevelopment\craftstripe\CraftStripe #}
+{# @var settings \swdevelopment\craftstripe\models\Settings #}
+
+{# register any asset bundles if we need to #}
+{% import '_includes/forms.twig' as forms %}
+
+{{ forms.autosuggestField({
+    name:'secretKey',
+    label:'Stripe Secret API Key'|t('craft-stripe'),
+    instructions:'Enter your Stripe Secret API key'|t('craft-stripe'),
+    value: ( settings.secretKey ?? ''),
+    suggestEnvVars: true,
+
+}) }}
+
+    

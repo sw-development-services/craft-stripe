@@ -3,6 +3,7 @@
 namespace swdevelopment\craftstripe\services;
 
 use Craft;
+use Stripe\StripeClient;
 use yii\base\Component;
 
 /**
@@ -10,4 +11,11 @@ use yii\base\Component;
  */
 class Invoices extends Component
 {
+
+    public function getInvoices( StripeClient $stripe )
+    {
+        // connect to stripe api and get the customer list
+        return $stripe->invoices->all();
+    }
+
 }
