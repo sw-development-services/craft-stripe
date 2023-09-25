@@ -1,0 +1,39 @@
+{% do view.registerAssetBundle("swdevelopment\\craftstripe\\assetbundles\\PluginAssetBundle") %}
+    {% import '_includes/forms.twig' as forms %}
+
+
+{% block content %}
+    <div>
+        This is the utility for syncing Stripe data. <br>what needs to be synced over:
+        <ul>
+            <li>Customers</li>
+            <li>Invoices</li>
+            <li>Payments</li>
+            <li>Products</li>
+        </ul>
+
+    </div>
+
+    <div id="sync">
+        <form method="post" class="">
+            {{ actionInput('craft-stripe/sync') }}
+            {{ csrfInput() }}
+            
+            {{ 
+                forms.button({
+                    label: 'Sync',
+                    spinner:true,
+                    id: 'sync',
+                    class: 'btn submit',
+                    type: 'submit'
+                })
+            }}
+
+        </form>
+
+    </div>
+
+
+
+{% endblock %}
+

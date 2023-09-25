@@ -190,6 +190,8 @@ class CraftStripe extends Plugin
                 $event->rules['craft-stripe/invoices'] = "$this->handle/invoice/index";
                 $event->rules['craft-stripe/invoices/create'] = "$this->handle/invoice/create";
 
+                $event->rules['craft-stripe/sync'] = "$this->handle/utility/sync";
+
                 // $event->rules['_craft-stripe/settings/save'] = "$this->handle/settings/save";
                 // $event->rules['_craft-stripe/settings/customers/save'] = "$this->handle/settings/customers/save";
             }
