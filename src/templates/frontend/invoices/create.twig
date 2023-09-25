@@ -1,0 +1,74 @@
+{% extends "_layouts/cp.twig" %}
+
+    {% do view.registerAssetBundle("swdevelopment\\craftstripe\\assetbundles\\PluginAssetBundle") %}
+    
+    {% import '_includes/forms.twig' as forms %}
+    
+    {% set title = "Stripe Invoice"|t('craft-stripe') %}
+
+    {% set var = {} %}
+    {% set productArray = {} %}
+
+    {% for customer in customers.data %}
+        {% set var = var|merge( { (customer.id) : customer.name } ) %}
+    {% endfor %}  
+    
+    {% for product in products.data %}
+        {% set productArray = productArray|merge( { (product.id) : product.name } ) %}
+    {% endfor %}  
+
+    
+        {% block sidebar %}
+            {% include "craft-stripe/_layout/_sidebar" %}
+        {% endblock %}
+            
+
+        {% block content %}
+
+            <form method="post">
+                <input type="hidden" name="action" value="craft-stripe/invoice/store">    
+                {{ redirectInput('craft-stripe/invoices/') }}
+                {{ csrfInput() }}
+
+                {{ forms.selectField({
+                        id: "customer",
+                        name: "customer[id]",
+                        label: "Customer"|t('craft-stripe'),
+                        options: var
+                    })
+                }}
+                
+                <div class="flex flex-end">
+                    {{ 
+                        forms.selectField({
+                            id: "product_select",
+                            name: "product[id]",
+                            label: "Product"|t('craft-stripe'),
+                            options: productArray
+                        })
+                    }}
+
+                    {{
+                        forms.button({
+                            label: "Add Product",
+                            name: "add",
+                            class: "btn submit",
+                            id: "add_product"
+                        })
+                    }}
+                </div>
+
+                <div class="block" id="products_added"></div>
+
+                <div class="buttons">
+                    <div class="btngroup submit">
+                        <input type="submit" class="btn submit" value="{{ 'Generate Invoice'|t('craft-stripe') }}" />
+                    </div>
+                </div>
+
+            </form>
+        {% endblock %}
+    
+    
+    
+    

@@ -1,0 +1,81 @@
+{% extends "_layouts/cp.twig" %}
+
+{% import '_includes/forms.twig' as forms %}
+
+
+{% set arrInvoices = invoices %}
+{% set title = "Stripe Invoices"|t('craft-stripe') %}
+
+    {% block sidebar %}
+        {% include "craft-stripe/_layout/_sidebar" %}
+    {% endblock %}
+
+    {% block actionButton %}
+        
+        <div class="buttons">
+            <div class="btngroup submit">
+                <a class="btn submit add icon" href="{{ url('craft-stripe/invoices/create') }}">{{ "Create Invoice"|t("craft-stripe") }}</a>
+            </div>
+        </div>
+        
+    {% endblock %}
+
+    {% block content %}
+
+        <div class="tableview tablepane">
+            <table class="data full-width">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell selectallcontainer">
+                            <div class="checkbox" role="checkbox" tabindex="0" aria-checked="false" aria-label="Select all"></div>
+                        </th>
+                        <th scope="col">Invoice ID</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Amount Due</th>
+                        <th scope="col">Amount Paid</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col">Invoice</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if arrInvoices|length %}
+                        {% if arrInvoices is not empty %}
+                            {% set invoices = arrInvoices.invoices %}    
+                            {# invoices will have an array length of 4 - should have keys object, data, has_more, url #}
+                            
+                        {% endif %}    
+                        
+                        
+                        {% for invoice in invoices.data %}
+                            <tr>
+                                <td class="checkbox-cell"><div class="checkbox" title="Select" role="checkbox" aria-label="Select" aria-checked="false"></div></td>
+                                <td>{{ invoice.id }}</td>
+                                <td>{{ invoice.created|date("F d, Y") }}</td>
+                                <td>{{ ( invoice.status == 'paid' ? '&#x2713;' : invoice.status) }}</td>
+                                <td>{{ invoice.customer }}</td>
+                                <td>{{ invoice.customer_name }}</td>
+                                <td>{{ invoice.customer_email }}</td>
+                                <td>${{ invoice.amount_due / 100 | number_format(2, '.', ',') }}</td>
+                                <td>{{ (invoice.amount_paid > 0 ) ? invoice.amount_paid / 100 | number_format(2, '.', ',') : '$0.00' }}</td>
+                                <td>{{ invoice.due_date|date("F d, Y") }}</td>
+                                <td><a href="{{ invoice.hosted_invoice_url }}" target="_blank">View Invoice</a></td>
+    
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+
+    {% endblock %}
+    
+
+
+

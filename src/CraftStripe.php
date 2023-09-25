@@ -5,21 +5,22 @@ namespace swdevelopment\craftstripe;
 use Craft;
 use craft\base\Model;
 use craft\base\Plugin;
+use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterCpNavItemsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
+use craft\services\Utilities;
 use craft\web\UrlManager;
-use yii\base\Event;
 use craft\web\twig\variables\Cp;
-use craft\events\RegisterCpNavItemsEvent;
-
 use swdevelopment\craftstripe\models\Settings;
 use swdevelopment\craftstripe\services\Coupons;
 use swdevelopment\craftstripe\services\Customers;
 use swdevelopment\craftstripe\services\Invoices;
+use swdevelopment\craftstripe\services\Products;
 use swdevelopment\craftstripe\services\Stripe;
 use swdevelopment\craftstripe\services\Webhooks;
-
-
+use swdevelopment\craftstripe\utilities\SyncStripeData;
+use yii\base\Event;
 
 /**
  * craft-stripe plugin
@@ -31,8 +32,9 @@ use swdevelopment\craftstripe\services\Webhooks;
  * @property-read Customers $customers
  * @property-read Invoices $invoices
  * @property-read Webhooks $webhooks
- * 
- * Stripe API - https://stripe.com/docs/api 
+ *
+ * Stripe API - https://stripe.com/docs/api
+ * @property-read Products $products
  */
 class CraftStripe extends Plugin
 {
@@ -58,7 +60,8 @@ class CraftStripe extends Plugin
                 'coupons' => Coupons::class, 
                 'customers' => Customers::class, 
                 'invoices' => Invoices::class, 
-                'webhooks' => Webhooks::class
+                'webhooks' => Webhooks::class,
+                'products' => Products::class
             ],
         ];
     }
@@ -111,7 +114,7 @@ class CraftStripe extends Plugin
     {
         return [
             'dashboard' => ['label' => Craft::t($this->handle, 'Dashboard'), 'url' => "$this->handle/frontend/dashboard.twig"],
-            'bar' => ['label' => 'Bar', 'url' => "$this->handle/bar"],
+            'bar' => ['label' => 'Webhooks', 'url' => "$this->handle/frontend/webhooks"],
             'baz' => ['label' => 'Baz', 'url' => "$this->handle/baz"]
         ];
     }
@@ -129,6 +132,9 @@ class CraftStripe extends Plugin
 
         $this->controlPanelSection();
         // $this->getCpNavItem();
+        Event::on(Utilities::class, Utilities::EVENT_REGISTER_UTILITY_TYPES, function (RegisterComponentTypesEvent $event) {
+            $event->types[] = SyncStripeData::class;
+        });
     }
 
     /**
@@ -182,6 +188,7 @@ class CraftStripe extends Plugin
                 $event->rules['craft-stripe'] = "$this->handle/stripe/index";
                 $event->rules['craft-stripe/customers'] = "$this->handle/customer/get-customers";
                 $event->rules['craft-stripe/invoices'] = "$this->handle/invoice/index";
+                $event->rules['craft-stripe/invoices/create'] = "$this->handle/invoice/create";
 
                 // $event->rules['_craft-stripe/settings/save'] = "$this->handle/settings/save";
                 // $event->rules['_craft-stripe/settings/customers/save'] = "$this->handle/settings/customers/save";

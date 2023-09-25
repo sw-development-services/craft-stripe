@@ -2,15 +2,43 @@
 {# @var settings \swdevelopment\craftstripe\models\Settings #}
 
 {# register any asset bundles if we need to #}
+
+{% do view.registerAssetBundle("swdevelopment\\craftstripe\\assetbundles\\PluginAssetBundle") %}
+
 {% import '_includes/forms.twig' as forms %}
 
 {{ forms.autosuggestField({
     name:'secretKey',
     label:'Stripe Secret API Key'|t('craft-stripe'),
     instructions:'Enter your Stripe Secret API key'|t('craft-stripe'),
-    value: ( settings.secretKey ?? ''),
+    value: ( settings.secretKey ) ?? '',
     suggestEnvVars: true,
 
 }) }}
+
+<div id="webhookPanel">
+    {{
+        forms.lightswitchField({
+            name:'enableWebhooks',
+            label:'Enable Webhooks',
+            id:'enableWebhook',
+            instructions: 'Turn this on to enable incoming webhooks. This extends the functionality of your website. To view which webhooks are enabled visit the webhooks page.',
+            on: settings.enableWebhooks
+        })
+    }}
+
+    {{ 
+        forms.autosuggestField({
+            name:'webhookSecret',
+            id: "webhookSecret",
+            label:'Stripe Webhook Secret Key'|t('craft-stripe'),
+            instructions:'Enter your Stripe Webhook Secret key'|t('craft-stripe'),
+            value: ( settings.webhookSecret ) ?? '',
+            suggestEnvVars: true,
+
+        }) 
+    }}
+
+</div>
 
     

@@ -18,4 +18,8 @@ class Invoices extends Component
         return $stripe->invoices->all();
     }
 
+    //public function createInvoice( StripeClient $stripe, $customerID, $payload ){
+
+    // }
+
 }

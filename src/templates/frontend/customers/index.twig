@@ -1,0 +1,53 @@
+{% extends "_layouts/cp.twig" %}
+
+{% import '_includes/forms.twig' as forms %}
+
+
+{% set customers = customers %}
+{% set title = "Customers"|t('craft-stripe') %}
+
+    {% block sidebar %}
+        {% include "craft-stripe/_layout/_sidebar" %}
+    {% endblock %}
+
+    {% block content %}
+
+        <div class="tableview tablepane">
+            <table class="data full-width">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell selectallcontainer">
+                            <div class="checkbox" role="checkbox" tabindex="0" aria-checked="false" aria-label="Select all"></div>
+                        </th>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Tax Exempt?</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for customer in customers.data %}
+                        <tr>
+                            <td class="checkbox-cell"><div class="checkbox" title="Select" role="checkbox" aria-label="Select" aria-checked="false"></div></td>
+                            <td>{{ customer.id }}</td>
+                            <td>{{ customer.created }}</td>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phone }}</td>
+                            <td>{{ customer.tax_exempt }}</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    {% endblock %}
+    
+
+
+

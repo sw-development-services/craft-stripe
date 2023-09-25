@@ -11,7 +11,10 @@ use craft\base\Model;
 class Settings extends Model
 {
     // public string $name;
-    public ?string $secretKey;
+    public ?string $secretKey = null;
+    public ?string $webhookSecret = null;
+
+    public ?bool $enableWebhooks = false;
 
     
 }

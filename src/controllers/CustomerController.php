@@ -23,14 +23,6 @@ class CustomerController extends Controller
     protected array|int|bool $allowAnonymous = self::ALLOW_ANONYMOUS_NEVER;
 
     /**
-     * _craft-stripe/customer action
-     */
-    /* public function actionIndex(): Response
-    {
-        // ...
-    }*/
-
-    /**
      * Summary of actionGetCustomers
      * @return \yii\web\Response
      */
@@ -46,7 +38,7 @@ class CustomerController extends Controller
         
         // return template
         return $this->renderTemplate(
-            'craft-stripe/frontend/customers',
+            'craft-stripe/frontend/customers/index',
             $customers,
             View::TEMPLATE_MODE_CP,
         );
