@@ -1,0 +1,26 @@
+{
+  "name": "craft-stripe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "Tim Strawbridge",
+  "license": "MIT",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49",
+    "mix-tailwindcss":"1.3.0",
+    "resolve-url-loader": "5.0.0",
+    "sass": "1.66.1",
+    "sass-loader": "13.3.2",
+    "tailwindcss": "3.3.3"
+  },
+  "dependencies": {
+    "cross-env": "7.0.3"
+  }
+}

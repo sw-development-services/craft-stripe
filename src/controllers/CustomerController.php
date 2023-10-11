@@ -38,7 +38,7 @@ class CustomerController extends Controller
         
         // return template
         return $this->renderTemplate(
-            'craft-stripe/frontend/customers/index',
+            'craft-stripe/admin/customers/index',
             $customers,
             View::TEMPLATE_MODE_CP,
         );

@@ -19,6 +19,23 @@
             {{ actionInput('craft-stripe/sync') }}
             {{ csrfInput() }}
             
+            {{ forms.checkboxSelectField({
+                label: "Sync Types"|t("craft_stripe"),
+                instructions: "Sync types to enable"|t,
+                id: 'syncTypes',
+                name: 'syncTypes',
+                options: {
+                    'customers': 'Sync Customer Data'|t('craft_stripe'),
+                    'products': 'Sync Product Data'|t('craft_stripe'),
+                    'invoices': 'Sync Invoice Data'|t('craft_stripe'),
+                    'payments': 'Sync Payment Data'|t('craft_stripe'),
+                    
+                },
+                
+                warning: false,
+                
+            }) }}
+
             {{ 
                 forms.button({
                     label: 'Sync',

@@ -39,7 +39,7 @@ class InvoiceController extends Controller
         ];
         // call invoice service to show all the invoices
         return $this->renderTemplate(
-            'craft-stripe/frontend/invoices/index',
+            'craft-stripe/admin/invoices/index',
             ['invoices' => $invoices],
             View::TEMPLATE_MODE_CP,
         );
@@ -58,7 +58,7 @@ class InvoiceController extends Controller
         $products = CraftStripe::getInstance()->products->getProducts($stripe)->toArray();
 
         return $this->renderTemplate(
-            'craft-stripe/frontend/invoices/create',
+            'craft-stripe/admin/invoices/create',
             [ 'customers' => $customers, 'products' => $products ],
             View::TEMPLATE_MODE_CP
         );

@@ -16,6 +16,16 @@
 
 }) }}
 
+{{
+    forms.lightswitchField({
+        name:'enableSyncLogging',
+        label:'Enable Sync Logging',
+        id:'enableSyncLogging',
+        instructions: 'Turn this on to enable the plugins Sync Logging',
+        on: settings.enableSyncLogging
+    })
+}}
+
 <div id="webhookPanel">
     {{
         forms.lightswitchField({

@@ -16,5 +16,7 @@ class Settings extends Model
 
     public ?bool $enableWebhooks = false;
 
+    public ?bool $enableSyncLogging = false;
+
     
 }

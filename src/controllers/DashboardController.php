@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $customers = ['jim', 'ben', 'tom'];
 
         return $this->renderTemplate(
-            'craft-stripe/frontend/dashboard',
+            'craft-stripe/admin/dashboard',
             $customers,
             View::TEMPLATE_MODE_CP,
         );

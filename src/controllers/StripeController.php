@@ -21,12 +21,10 @@ class StripeController extends Controller
      */
     public function actionIndex(): Response
     {
-        // return the view - frontend/index.twig
-
         $customers = ['jim', 'ben', 'tom'];
 
         return $this->renderTemplate(
-            'craft-stripe/frontend/index',
+            'craft-stripe/admin/index',
             ['customers' => $customers],
             View::TEMPLATE_MODE_CP,
         );

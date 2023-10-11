@@ -113,8 +113,8 @@ class CraftStripe extends Plugin
     public function subnavs()
     {
         return [
-            'dashboard' => ['label' => Craft::t($this->handle, 'Dashboard'), 'url' => "$this->handle/frontend/dashboard.twig"],
-            'bar' => ['label' => 'Webhooks', 'url' => "$this->handle/frontend/webhooks"],
+            'dashboard' => ['label' => Craft::t($this->handle, 'Dashboard'), 'url' => "$this->handle"],
+            'webhooks' => ['label' => 'Webhooks', 'url' => "$this->handle/webhooks"],
             'baz' => ['label' => 'Baz', 'url' => "$this->handle/baz"]
         ];
     }
@@ -169,10 +169,7 @@ class CraftStripe extends Plugin
                 $event->rules['stripe/example'] = "$this->handle/stripe/example";
                 $event->rules['stripe/render'] = "$this->handle/stripe/render";
                 $event->rules['customer'] = "$this->handle/customer/index";
-                // $event->rules['stripe/index'] = "$this->handle/stripe/get-customers";
                 
-                // $event->rules['craft-stripe'] = "$this->handle/customer/get-customers";
-                //$event->rules['_craft-stripe'] = "$this->handle/settings";
 
             }
         );   
