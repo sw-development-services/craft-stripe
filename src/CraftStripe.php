@@ -181,16 +181,14 @@ class CraftStripe extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                // $event->rules['craft-stripe/dashboard'] = "$this->handle/dashboard/index";
                 $event->rules['craft-stripe'] = "$this->handle/stripe/index";
                 $event->rules['craft-stripe/customers'] = "$this->handle/customer/get-customers";
                 $event->rules['craft-stripe/invoices'] = "$this->handle/invoice/index";
                 $event->rules['craft-stripe/invoices/create'] = "$this->handle/invoice/create";
+                $event->rules['craft-stripe/webhooks'] = "$this->handle/webhook/index";    
 
                 $event->rules['craft-stripe/sync'] = "$this->handle/utility/sync";
 
-                // $event->rules['_craft-stripe/settings/save'] = "$this->handle/settings/save";
-                // $event->rules['_craft-stripe/settings/customers/save'] = "$this->handle/settings/customers/save";
             }
         );
     }

@@ -1,0 +1,66 @@
+{% extends "_layouts/cp.twig" %}
+
+    {% import '_includes/forms.twig' as forms %}
+    
+    {% set arrWebhooks = webhooks %}
+    
+    {% set title = "Webhooks"|t('craft-stripe') %}
+    
+        {% block sidebar %}
+            {% include "craft-stripe/_layout/_sidebar" %}
+        {% endblock %}
+    
+        {% block content %}
+
+            <h1>Your Stripe account's Webhooks</h1>
+
+            <div class="tableview tablepane">
+                <table class="data full-width">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-cell selectallcontainer">
+                                <div class="checkbox" role="checkbox" tabindex="0" aria-checked="false" aria-label="Select all"></div>
+                            </th>
+                            <th scope="col">Webhook ID</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Api Version</th>
+                            <th scope="col">Application</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">URL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if arrWebhooks|length %}
+                            {% if arrWebhooks is not empty %}
+                                    
+                                {% for webhook in arrWebhooks.data %}
+                                    <tr>
+                                        <td class="checkbox-cell"><div class="checkbox" title="Select" role="checkbox" aria-label="Select" aria-checked="false"></div></td>
+                                        <td>{{ webhook.id }}</td>
+                                        <td>{{ webhook.created|date("F d, Y") }}</td>
+                                        <td>{{ webhook.api_version }}</td>
+                                        <td>{{ webhook.application }}</td>
+                                        <td>{{ webhook.description }}</td>
+                                        <td>{{ ( webhook.status == 'paid' ? '&#x2713;' : webhook.status) }}</td>
+                                        <td><a href="{{ webhook.url }}" target="_blank">View Invoice</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+
+                        {% endif %}
+                    </tbody>
+                </table>
+
+            </div>
+            
+            
+            
+        
+        {% endblock %}
+        
+    
+    
+    
+    
